@@ -6,6 +6,9 @@ let listOfUsers = [];
 const createNewUser = async ({ name, email, password }) => {
   if (!name || !email || !password) return null;
 
+  // el metodo hash de bcrypt, genera textos encriptados
+  // le paso la contraseña para encriptar
+  // y la cantidad de veces que quiero encriptarla (10)
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const newUser = {
@@ -17,6 +20,8 @@ const createNewUser = async ({ name, email, password }) => {
   };
 
   listOfUsers.push(newUser);
+
+  console.log(newUser);
 
   return newUser;
 };

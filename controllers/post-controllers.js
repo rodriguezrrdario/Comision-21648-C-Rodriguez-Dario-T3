@@ -1,5 +1,6 @@
 import { postModel } from "../models/post-model.js";
 
+//crear nuevo posteo
 export function ctrlCreatePost(req, res) {
   const { title, desc, image } = req.body;
 
@@ -8,11 +9,13 @@ export function ctrlCreatePost(req, res) {
   res.sendStatus(201);
 }
 
+//obtener todos los posteos
 export const ctrlGetAllPosts = (req, res) => {
   const posts = postModel.findAll(req.user.id);
   res.json(posts);
 };
 
+//obtener un posteo (por ID)
 export const ctrlGetPostById = (req, res) => {
   const { postId } = req.params;
 
@@ -25,6 +28,7 @@ export const ctrlGetPostById = (req, res) => {
   res.status(200).json(post);
 };
 
+//actualizar posteo
 export const ctrlUpdatePost = (req, res) => {
   console.log(req.params);
 
@@ -39,6 +43,7 @@ export const ctrlUpdatePost = (req, res) => {
   res.sendStatus(200);
 };
 
+//borrar posteo
 export const ctrlDeletePost = (req, res) => {
   const { postId } = req.params;
 

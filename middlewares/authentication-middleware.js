@@ -13,6 +13,7 @@ export const authenticationMiddleware = (req, res, next) => {
 
     const user = userModel.findOne(id);
 
+    // agrega la info del User al req, para poder usarla desde el controlador de posteos
     req.user = user;
 
     next();
