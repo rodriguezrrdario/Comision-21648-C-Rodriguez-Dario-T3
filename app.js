@@ -22,6 +22,7 @@ import fs from "node:fs/promises";
 
 // importamos el siguiente metodo del nodemailer
 import { createTransport } from "nodemailer";
+import { startConnection } from "./settings/database.js";
 
 // definimos la carpeta donde se encuentra mi proyecto, el app.js
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -103,9 +104,9 @@ app.post("/send-email", async (req, res) => {
   }
 });
 
-app.listen(env.PORT, () => {
-  console.log(`.
-  .
-   .
-    ...Servidor funcionando en el puerto ${env.PORT}`);
+app.listen(env.PORT, async () => {
+  //Conección a la base de datos
+  await startConnection();
+  console.log(`..
+   ...Servidor funcionando en el puerto ${env.PORT}`);
 });

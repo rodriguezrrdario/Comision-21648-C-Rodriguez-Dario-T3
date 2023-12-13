@@ -1,45 +1,33 @@
-import { v4 as uuid } from "uuid";
-import bcrypt from "bcrypt";
+//import { v4 as uuid } from "uuid";
+//import bcrypt from "bcrypt";
+import { Schema, model } from "mongoose";
 
-let listOfUsers = [];
+// creamos una clase, que es el schema del usuario
+const UserSchema = new Schema(
+  {
+    name: {
+      type: String,
+      require: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+      require: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      require: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const createNewUser = async ({ name, email, password }) => {
-  if (!name || !email || !password) return null;
-
-  // el metodo hash de bcrypt, genera textos encriptados
-  // le paso la contraseña para encriptar
-  // y la cantidad de veces que quiero encriptarla (10)
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const newUser = {
-    id: uuid(),
-    name,
-    email,
-    password: hashedPassword,
-    isAdmin: name === "seba",
-  };
-
-  listOfUsers.push(newUser);
-
-  console.log(newUser);
-
-  return newUser;
-};
-
-const getUserById = (id) => {
-  const user = listOfUsers.find((user) => user.id === id);
-
-  return user;
-};
-
-const getUserByEmail = (email) => {
-  const user = listOfUsers.find((user) => user.email === email);
-
-  return user;
-};
-
-export const userModel = {
-  create: createNewUser,
-  findOne: getUserById,
-  findByEmail: getUserByEmail,
-};
+//creamos el modelo de usuario que cumple con el schema definido
+export const userModel = model("User", UserSchema);
