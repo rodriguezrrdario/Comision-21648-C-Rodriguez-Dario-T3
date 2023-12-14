@@ -76,18 +76,23 @@ export const ctrlLogin = async (req, res) => {
   try {
     const user = await getUserByEmail({ email });
     //valida si el usuario existe
-    if (!user) return res.sendStatus(404);
-
+    if (!user) {
+      console.log("Email no válido.");
+      return res.sendStatus(404);
+    }
     //metodo "compare" valida el dato pasado con el que ya esta encriptado
     //devuelve si es true o false
     const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) return res.sendStatus(404);
+    if (!isMatch) {
+      console.log("Contraseña no válida.");
+      return res.sendStatus(404);
+    }
     //metodo sign que genera un token usando la libreria JWT y la palabra secreta definida
     const token = jwt.sign({ id: user.id }, env.JWT_SECRET);
 
-    console.log(`...Login correcto de: "${user.name}"`);
-    res.status(201).json({ token });
+    console.log(`...Login correcto de "${user.name}"`);
+    res.status(201).json({ user, token });
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);

@@ -1,14 +1,17 @@
 import { body, param } from "express-validator";
 
 export const updatePostValidation = [
-  param("postId").isNumeric().withMessage("La id debe ser un numero").toInt(),
+  param("postId").isString().withMessage("La id debe ser un numero"),
   body("title")
     .optional()
     .isString()
     .withMessage("El título debe ser un string"),
-  body("desc")
+  body("description")
     .optional()
     .isString()
     .withMessage("La descripcion debe ser un string"),
-  body("image").optional().isURL().withMessage("La imagen deber ser una url."),
+  body("imageURL")
+    .optional()
+    .isURL()
+    .withMessage("La imagen deber ser una url."),
 ];

@@ -68,10 +68,12 @@ app.post("/upload", async (req, res) => {
 // El middleware de autorización siempre va despues de la autenticación
 app.use(
   "/posts",
-  authenticationMiddleware,
-  authorizationMiddleware,
+  //TODO DESCOMENTAR la autenticacion y autho
+  //authenticationMiddleware,
+  //authorizationMiddleware,
   postsRouter
 );
+
 app.use("/users", userRouter);
 
 //instanciamos un transportador directamente con el metodo del nodemailer

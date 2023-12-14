@@ -6,14 +6,14 @@ export const createPostValidation = [
     .withMessage("El título es requerido.")
     .isString()
     .withMessage("El título debe ser un string"),
-  body("desc")
+  body("description")
     .notEmpty()
     .withMessage("La descripcion es requerida.")
     .isString()
     .withMessage("La descripcion debe ser un string"),
-  body("image")
+  body("imageURL")
     .notEmpty()
-    .withMessage("La image es requerida.")
+    .withMessage("La imagen es requerida.")
     .isURL()
     .withMessage("La imagen deber ser una url."),
 ];
