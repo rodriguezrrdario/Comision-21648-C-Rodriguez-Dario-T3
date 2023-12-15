@@ -16,4 +16,7 @@ export const createPostValidation = [
     .withMessage("La imagen es requerida.")
     .isURL()
     .withMessage("La imagen deber ser una url."),
+  body("user")
+    .notEmpty()
+    .withMessage("El ID de usuario es requerido."),
 ];

@@ -4,7 +4,7 @@ import { env } from "../settings/envs.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-//REGISTRO de nuevo usuario -OK
+//REGISTRO de nuevo usuario -OK-
 export const ctrlRegister = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -38,7 +38,7 @@ export const ctrlRegister = async (req, res) => {
   }
 };
 
-//OBTENER lista de usuarios -OK
+//OBTENER lista de usuarios -OK-
 export const ctrlListUsers = async (_req, res) => {
   try {
     const allUsers = await userModel
@@ -54,7 +54,7 @@ export const ctrlListUsers = async (_req, res) => {
   }
 };
 
-// OBTENER un usuario segun su ID   -OK
+// OBTENER un usuario segun su ID   -OK-
 export const ctrlFindOneUser = async (req, res) => {
   const { userId } = req.params;
   try {
@@ -82,7 +82,7 @@ export const getUserByEmail = async ({ email }) => {
   }
 };
 
-//LOGIN de usuario  -OK
+//LOGIN de usuario  -OK-
 export const ctrlLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -111,7 +111,7 @@ export const ctrlLogin = async (req, res) => {
   }
 };
 
-//ACTUALIZAR info de usuario   -OK
+//ACTUALIZAR info de usuario   -OK-
 export const ctrlUpdateUser = async (req, res) => {
   const { userId } = req.params;
   try {
@@ -127,7 +127,7 @@ export const ctrlUpdateUser = async (req, res) => {
   }
 };
 
-// ELIMINAR usuario y sus posteos    -OK
+// ELIMINAR usuario y sus posteos    -OK-
 export const ctrlDeleteUser = async (req, res) => {
   try {
     const { userId } = req.params;

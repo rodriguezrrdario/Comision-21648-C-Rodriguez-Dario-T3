@@ -82,7 +82,7 @@ const transporter = createTransport({
   host: "smtp.gmail.com",
   secure: true,
   auth: {
-    user: "prueba.proyecto.sistema@gmail.com",
+    user: env.MAIL_CUENTA,
     pass: env.MAIL_PASSWORD,
   },
 });
@@ -92,7 +92,7 @@ app.post("/send-email", async (req, res) => {
     const { destinatario, motivo, mensaje } = req.body;
 
     const response = await transporter.sendMail({
-      from: "prueba.proyecto.sistema@gmail.com",
+      from:  env.MAIL_CUENTA,
       to: destinatario,
       subject: motivo,
       text: mensaje,
@@ -109,6 +109,5 @@ app.post("/send-email", async (req, res) => {
 app.listen(env.PORT, async () => {
   //Conección a la base de datos
   await startConnection();
-  console.log(`..
-   ...Servidor funcionando en el puerto ${env.PORT}`);
+  console.log(`.......Servidor funcionando en el puerto ${env.PORT}`);
 });

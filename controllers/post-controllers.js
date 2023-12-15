@@ -1,14 +1,14 @@
 import { PostModel } from "../models/post-model.js";
 import { userModel } from "../models/user-model.js";
 
-//CREAR nuevo posteo   -OK
+//CREAR nuevo posteo   -OK-
 export const ctrlCreatePost = async (req, res) => {
   try {
     //Desde el body, obtenemos el usuario que crea el post
     const user = await userModel.findById(req.body.user);
     //valida que exista el usuario, para que no sea un post sin usuario
     if (!user) {
-      console.log("No hay User definido.");
+      console.log("No hay ID de usuario definido.");
       return res.sendStatus(404);
     }
     //creamos el post
@@ -25,7 +25,7 @@ export const ctrlCreatePost = async (req, res) => {
   }
 };
 
-//OBTENER todos los posteos   -OK
+//OBTENER todos los posteos   -OK-
 export const ctrlGetAllPosts = async (req, res) => {
   try {
     // omitiendo la version y fecha de actualizado
@@ -48,7 +48,7 @@ export const ctrlGetAllPosts = async (req, res) => {
   }
 };
 
-//OBTENER un posteo por ID   -OK
+//OBTENER un posteo por ID   -OK-
 export const ctrlGetPost = async (req, res) => {
   const { postId } = req.params;
 
@@ -70,7 +70,7 @@ export const ctrlGetPost = async (req, res) => {
   }
 };
 
-//ACTUALIZAR un posteo   -OK
+//ACTUALIZAR un posteo   -OK-
 export const ctrlUpdatePost = async (req, res) => {
   const { postId } = req.params;
   try {
@@ -86,7 +86,7 @@ export const ctrlUpdatePost = async (req, res) => {
   }
 };
 
-//BORRAR un posteo   -OK
+//BORRAR un posteo   -OK-
 export const ctrlDeletePost = async (req, res) => {
   try {
     const { postId } = req.params;
