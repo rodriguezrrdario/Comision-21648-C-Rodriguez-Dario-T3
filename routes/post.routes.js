@@ -1,10 +1,10 @@
 import { Router } from "express";
 import {
   ctrlCreatePost,
-  ctrlDeletePost,
   ctrlGetAllPosts,
-  ctrlGetPostById,
+  ctrlGetPost,
   ctrlUpdatePost,
+  ctrlDeletePost,
 } from "../controllers/post-controllers.js";
 import { createPostValidation } from "../validations/create-post-validations.js";
 
@@ -15,15 +15,9 @@ import { updatePostValidation } from "../validations/update-post-validations.js"
 const postsRouter = Router();
 
 postsRouter.get("/", ctrlGetAllPosts);
-
-postsRouter.get(
-  "/:postId",
-  findPostValidation,
-  applyValidations,
-  ctrlGetPostById
-);
-
 postsRouter.post("/", createPostValidation, applyValidations, ctrlCreatePost);
+
+postsRouter.get("/:postId", findPostValidation, applyValidations, ctrlGetPost);
 
 postsRouter.patch(
   "/:postId",
