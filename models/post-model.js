@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 const PostSchema = new Schema(
   {
@@ -18,12 +18,15 @@ const PostSchema = new Schema(
     },
     createdAt: {
       type: String,
-      //required: false,
     },
-    //TODO falta implementar
-    //autor: String,
-    //comments: String,
+    user: {
+      type: Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
+  //TODO falta implementar
+  //comments: String
   {
     timestamps: true,
   }

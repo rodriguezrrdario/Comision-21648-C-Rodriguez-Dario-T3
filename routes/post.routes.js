@@ -15,10 +15,9 @@ import { updatePostValidation } from "../validations/update-post-validations.js"
 const postsRouter = Router();
 
 postsRouter.get("/", ctrlGetAllPosts);
+postsRouter.post("/", createPostValidation, applyValidations, ctrlCreatePost);
 
 postsRouter.get("/:postId", findPostValidation, applyValidations, ctrlGetPost);
-
-postsRouter.post("/", createPostValidation, applyValidations, ctrlCreatePost);
 
 postsRouter.patch(
   "/:postId",
