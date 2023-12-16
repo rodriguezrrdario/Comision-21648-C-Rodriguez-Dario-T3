@@ -4,6 +4,8 @@ config();
 
 export const env = {
   PORT: process.env.PORT || 4000,
+
+  MAIL_CUENTA: process.env.MAIL_CUENTA,
   MAIL_PASSWORD: process.env.MAIL_PASSWORD,
 
   JWT_SECRET: process.env.JWT_SECRET || "secret",

@@ -7,36 +7,52 @@ import bcrypt from "bcrypt";
 //REGISTRO de nuevo usuario -OK-
 export const ctrlRegister = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    //const { name, email, password } = req.body;
 
     // el metodo hash de bcrypt, genera textos encriptados
     // le paso la contraseña para encriptar
     // y la cantidad de veces que quiero encriptarla (10)
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-    const newUserInfo = {
-      name,
-      email,
-      password: hashedPassword,
-      isAdmin: name === "seba", // TODO Cambiar para que valide de otra forma
-    };
+    req.body.password =  hashedPassword; 
+    //req.body.isAdmin = (req.body.name === "seba")
+
+    //const newUserInfo = {
+    //  name,
+    //  email,
+    //  password: hashedPassword  
+    //};
 
     // crear nuevo usuario usando el ODM Mongoose
-    const user = await userModel.create(newUserInfo);
+    //const user = await userModel.create(newUserInfo);    cambiado por
+    const user = await userModel.create(req.body);
     if (!user) return res.sedStatus(400);
 
-    //se genera un token para el nuevo usuario
-    const token = jwt.sign({ id: req.id }, env.JWT_SECRET);
+    //se genera un token para el nuevo usuario 
+    const token = jwt.sign({ id: user.id }, env.JWT_SECRET);
 
     //devuelve el nombre del usuario y el token generado
     res.status(201).json({ token });
 
-    console.log(`Usuario creado: "${name}"`);
+    console.log(`Usuario creado: "${req.body.name}"`);
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //OBTENER lista de usuarios -OK-
 export const ctrlListUsers = async (_req, res) => {
@@ -83,7 +99,7 @@ export const getUserByEmail = async ({ email }) => {
 };
 
 //LOGIN de usuario  -OK-
-export const ctrlLogin = async (req, res) => {
+export const ctrlLogin = async (req, res) => {  
   const { email, password } = req.body;
   try {
     //valida si el usuario existe
